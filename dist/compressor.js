@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2026-06-08T09:48:42.642Z
+ * Date: 2026-06-08T09:55:24.438Z
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -565,12 +565,7 @@
   function dataURLtoBlob(dataURL) {
     const arr = dataURL.split(',');
     const mime = arr[0].match(/:(.*?);/)[1];
-    const binary = atob(arr[1]);
-    const bytes = new Uint8Array(binary.length);
-
-    for (let i = 0; i < binary.length; i += 1) {
-      bytes[i] = binary.charCodeAt(i);
-    }
+    const bytes = Uint8Array.from(atob(arr[1]), (c) => c.charCodeAt(0));
 
     return new Blob([bytes], { type: mime });
   }
@@ -875,28 +870,9 @@
               options.mimeType,
             )));
 
-            if (blob.arrayBuffer) {
-              blob.arrayBuffer().then(next).catch(() => {
-                this.fail(new Error('Failed to read the compressed image with Blob.arrayBuffer().'));
-              });
-            } else {
-              const reader = new FileReader();
-
-              this.reader = reader;
-              reader.onload = ({ target }) => {
-                next(target.result);
-              };
-              reader.onabort = () => {
-                this.fail(new Error('Aborted to read the compressed image with FileReader.'));
-              };
-              reader.onerror = () => {
-                this.fail(new Error('Failed to read the compressed image with FileReader.'));
-              };
-              reader.onloadend = () => {
-                this.reader = null;
-              };
-              reader.readAsArrayBuffer(blob);
-            }
+            blob.arrayBuffer().then(next).catch(() => {
+              this.fail(new Error('Failed to read the compressed image with Blob.arrayBuffer().'));
+            });
           } else {
             done(blob);
           }
@@ -913,7 +889,7 @@
     }) {
       const { file, image, options } = this;
 
-      if (URL && image.src.indexOf('blob:') === 0) {
+      if (URL && image.src.startsWith('blob:')) {
         URL.revokeObjectURL(image.src);
       }
 

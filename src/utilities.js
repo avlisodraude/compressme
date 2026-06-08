@@ -408,12 +408,7 @@ export function isBlob(value) {
 export function dataURLtoBlob(dataURL) {
   const arr = dataURL.split(',');
   const mime = arr[0].match(/:(.*?);/)[1];
-  const binary = atob(arr[1]);
-  const bytes = new Uint8Array(binary.length);
-
-  for (let i = 0; i < binary.length; i += 1) {
-    bytes[i] = binary.charCodeAt(i);
-  }
+  const bytes = Uint8Array.from(atob(arr[1]), (c) => c.charCodeAt(0));
 
   return new Blob([bytes], { type: mime });
 }

@@ -318,28 +318,9 @@ export default class Compressor {
             options.mimeType,
           )));
 
-          if (blob.arrayBuffer) {
-            blob.arrayBuffer().then(next).catch(() => {
-              this.fail(new Error('Failed to read the compressed image with Blob.arrayBuffer().'));
-            });
-          } else {
-            const reader = new FileReader();
-
-            this.reader = reader;
-            reader.onload = ({ target }) => {
-              next(target.result);
-            };
-            reader.onabort = () => {
-              this.fail(new Error('Aborted to read the compressed image with FileReader.'));
-            };
-            reader.onerror = () => {
-              this.fail(new Error('Failed to read the compressed image with FileReader.'));
-            };
-            reader.onloadend = () => {
-              this.reader = null;
-            };
-            reader.readAsArrayBuffer(blob);
-          }
+          blob.arrayBuffer().then(next).catch(() => {
+            this.fail(new Error('Failed to read the compressed image with Blob.arrayBuffer().'));
+          });
         } else {
           done(blob);
         }
@@ -356,7 +337,7 @@ export default class Compressor {
   }) {
     const { file, image, options } = this;
 
-    if (URL && image.src.indexOf('blob:') === 0) {
+    if (URL && image.src.startsWith('blob:')) {
       URL.revokeObjectURL(image.src);
     }
 
