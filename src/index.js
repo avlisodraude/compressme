@@ -215,21 +215,16 @@ export default class Compressor {
     const params = [];
 
     if (resizable) {
-      let srcX;
-      let srcY;
-      let srcWidth;
-      let srcHeight;
-
-      ({ width: srcWidth, height: srcHeight } = getAdjustedSizes({
+      const { width: srcWidth, height: srcHeight } = getAdjustedSizes({
         aspectRatio,
         width: naturalWidth,
         height: naturalHeight,
       }, {
         contain: 'cover',
         cover: 'contain',
-      }[options.resize]));
-      srcX = (naturalWidth - srcWidth) / 2;
-      srcY = (naturalHeight - srcHeight) / 2;
+      }[options.resize]);
+      const srcX = (naturalWidth - srcWidth) / 2;
+      const srcY = (naturalHeight - srcHeight) / 2;
 
       params.push(srcX, srcY, srcWidth, srcHeight);
     }

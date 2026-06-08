@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2026-06-08T11:35:06.121Z
+ * Date: 2026-06-08T11:43:09.845Z
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -759,21 +759,16 @@
       const params = [];
 
       if (resizable) {
-        let srcX;
-        let srcY;
-        let srcWidth;
-        let srcHeight;
-
-        ({ width: srcWidth, height: srcHeight } = getAdjustedSizes({
+        const { width: srcWidth, height: srcHeight } = getAdjustedSizes({
           aspectRatio,
           width: naturalWidth,
           height: naturalHeight,
         }, {
           contain: 'cover',
           cover: 'contain',
-        }[options.resize]));
-        srcX = (naturalWidth - srcWidth) / 2;
-        srcY = (naturalHeight - srcHeight) / 2;
+        }[options.resize]);
+        const srcX = (naturalWidth - srcWidth) / 2;
+        const srcY = (naturalHeight - srcHeight) / 2;
 
         params.push(srcX, srcY, srcWidth, srcHeight);
       }
