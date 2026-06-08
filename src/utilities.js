@@ -393,10 +393,6 @@ export function insertExif(arrayBuffer, exifArray) {
  * @returns {boolean} Returns `true` if the given value is a Blob, else `false`.
  */
 export function isBlob(value) {
-  if (typeof Blob === 'undefined') {
-    return false;
-  }
-
   return value instanceof Blob || Object.prototype.toString.call(value) === '[object Blob]';
 }
 

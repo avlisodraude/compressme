@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2026-06-08T11:19:46.007Z
+ * Date: 2026-06-08T11:22:07.664Z
  */
 'use strict';
 
@@ -546,10 +546,6 @@ function insertExif(arrayBuffer, exifArray) {
  * @returns {boolean} Returns `true` if the given value is a Blob, else `false`.
  */
 function isBlob(value) {
-  if (typeof Blob === 'undefined') {
-    return false;
-  }
-
   return value instanceof Blob || Object.prototype.toString.call(value) === '[object Blob]';
 }
 
@@ -566,8 +562,7 @@ function dataURLtoBlob(dataURL) {
   return new Blob([bytes], { type: mime });
 }
 
-const { FileReader } = WINDOW;
-const URL = WINDOW.URL;
+const { FileReader, URL } = WINDOW;
 const REGEXP_EXTENSION = /\.\w+$/;
 const AnotherCompressor = WINDOW.Compressor;
 

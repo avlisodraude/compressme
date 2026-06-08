@@ -18,8 +18,7 @@ import {
   resetAndGetOrientation,
 } from './utilities';
 
-const { FileReader } = WINDOW;
-const URL = WINDOW.URL;
+const { FileReader, URL } = WINDOW;
 const REGEXP_EXTENSION = /\.\w+$/;
 const AnotherCompressor = WINDOW.Compressor;
 
