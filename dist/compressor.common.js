@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2026-06-08T09:40:20.761Z
+ * Date: 2026-06-08T09:45:15.124Z
  */
 'use strict';
 
@@ -162,15 +162,6 @@ const WINDOW = IS_BROWSER ? window : {};
  */
 const isPositiveNumber = (value) => value > 0 && value < Infinity;
 
-/**
- * Convert array-like or iterable object to an array.
- * @param {*} value - The value to convert.
- * @returns {Array} Returns a new array.
- */
-function toArray(value) {
-  return Array.from(value);
-}
-
 const REGEXP_IMAGE_TYPE = /^image\/.+$/;
 
 /**
@@ -275,8 +266,6 @@ function isCanvasAvailable() {
   return canvasAvailableCache;
 }
 
-const { btoa } = WINDOW;
-
 /**
  * Transform array buffer to Data URL.
  * @param {ArrayBuffer} arrayBuffer - The array buffer to transform.
@@ -289,9 +278,7 @@ function arrayBufferToDataURL(arrayBuffer, mimeType) {
   let uint8 = new Uint8Array(arrayBuffer);
 
   while (uint8.length > 0) {
-    // XXX: Babel's `toConsumableArray` helper will throw error in IE or Safari 9
-    // eslint-disable-next-line prefer-spread
-    chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
+    chunks.push(fromCharCode.apply(null, uint8.subarray(0, chunkSize)));
     uint8 = uint8.subarray(chunkSize);
   }
 
