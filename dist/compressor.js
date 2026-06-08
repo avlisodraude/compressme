@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2026-06-08T11:23:44.182Z
+ * Date: 2026-06-08T11:24:59.055Z
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -262,7 +262,7 @@
     let uint8 = new Uint8Array(arrayBuffer);
 
     while (uint8.length > 0) {
-      chunks.push(fromCharCode.apply(null, uint8.subarray(0, chunkSize)));
+      chunks.push(fromCharCode(...uint8.subarray(0, chunkSize)));
       uint8 = uint8.subarray(chunkSize);
     }
 

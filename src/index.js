@@ -1,7 +1,5 @@
 import DEFAULTS from './defaults';
-import {
-  WINDOW,
-} from './constants';
+import { WINDOW } from './constants';
 import {
   arrayBufferToDataURL,
   dataURLtoBlob,

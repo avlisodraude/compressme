@@ -101,7 +101,7 @@ export function arrayBufferToDataURL(arrayBuffer, mimeType) {
   let uint8 = new Uint8Array(arrayBuffer);
 
   while (uint8.length > 0) {
-    chunks.push(fromCharCode.apply(null, uint8.subarray(0, chunkSize)));
+    chunks.push(fromCharCode(...uint8.subarray(0, chunkSize)));
     uint8 = uint8.subarray(chunkSize);
   }
 
