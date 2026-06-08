@@ -3,7 +3,7 @@
  *
  * Detects camera RAW files (DNG, CR2, CR3, NEF, ARW, RAF, RW2, PEF, ORF …)
  * and converts them via the server-side endpoint before passing the result to
- * Compressor.js.
+ * PixSqueeze.js.
  *
  * Supported formats (server converts all of these to JPEG via sharp/libvips):
  *   - DNG  — Adobe / Apple ProRAW (iOS)
@@ -24,7 +24,7 @@
  *     if (await isRawFile(file)) {
  *       file = await convertRawOnServer(file);
  *     }
- *     new Compressor(file, options);
+ *     new PixSqueeze(file, options);
  *   }
  */
 
@@ -72,7 +72,7 @@ export async function isRawFile(file) {
 
 /**
  * Upload a camera RAW file to the server conversion endpoint and get back a
- * standard JPEG File object ready to pass into Compressor.js.
+ * standard JPEG File object ready to pass into PixSqueeze.js.
  *
  * @param {File|Blob} file - The RAW file to convert.
  * @param {string} [endpoint='/api/convert/raw'] - Override the server URL if needed.

@@ -2,7 +2,7 @@
  * HEIC client-side utilities
  *
  * These helpers detect HEIC/HEIF files and convert them via the server-side
- * endpoint before passing the result to Compressor.js.  No WASM, no large
+ * endpoint before passing the result to PixSqueeze.js.  No WASM, no large
  * dependencies — the heavy decoding work is done on the server using Sharp.
  *
  * Usage:
@@ -12,7 +12,7 @@
  *     if (await isHeicFile(file)) {
  *       file = await convertHeicOnServer(file);
  *     }
- *     new Compressor(file, options);
+ *     new PixSqueeze(file, options);
  *   }
  */
 
@@ -51,7 +51,7 @@ export async function isHeicFile(file) {
 
 /**
  * Upload a HEIC/HEIF file to the server conversion endpoint and get back a
- * standard JPEG File object ready to pass into Compressor.js.
+ * standard JPEG File object ready to pass into PixSqueeze.js.
  *
  * @param {File|Blob} file - The HEIC file to convert.
  * @param {string} [endpoint='/api/convert/heic'] - Override the server URL if needed.

@@ -1,7 +1,7 @@
 describe('convertTypes', () => {
   it('should convert the image from PNG to JPEG', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.png', (image) => {
-      const compressor = new Compressor(image, {
+      const compressor = new PixSqueeze(image, {
         convertSize: 0,
         success(result) {
           expect(image.type).to.equal('image/png');
@@ -16,7 +16,7 @@ describe('convertTypes', () => {
 
   it('should not convert the image from PNG to JPEG', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.png', (image) => {
-      const compressor = new Compressor(image, {
+      const compressor = new PixSqueeze(image, {
         convertTypes: [],
         convertSize: 0,
         success(result) {

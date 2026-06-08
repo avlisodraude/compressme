@@ -2,7 +2,7 @@ window.addEventListener('DOMContentLoaded', function () {
   var Vue = window.Vue;
   var URL = window.URL || window.webkitURL;
   var XMLHttpRequest = window.XMLHttpRequest;
-  var Compressor = window.Compressor;
+  var PixSqueeze = window.PixSqueeze;
 
   // ── HEIC helpers (inline, no import needed in plain-JS demo) ─────────────
 
@@ -198,7 +198,7 @@ window.addEventListener('DOMContentLoaded', function () {
             vm.inputURL = URL.createObjectURL(resolvedFile);
           }
           vm.input = resolvedFile;
-          new Compressor(resolvedFile, vm.options);
+          new PixSqueeze(resolvedFile, vm.options);
         }).catch(function (err) {
           window.alert(err.message);
         });

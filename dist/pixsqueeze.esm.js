@@ -1,14 +1,12 @@
 /*!
- * Compressor.js v1.3.0
- * https://fengyuanchen.github.io/compressorjs
+ * PixSqueeze.js v1.3.0
+ * https://avlisodraude.github.io/compressme
  *
- * Copyright 2018-present Chen Fengyuan
+ * Copyright 2018-present Eduardo Silva Navarrete
  * Released under the MIT license
  *
- * Date: 2026-06-08T11:47:18.190Z
+ * Date: 2026-06-08T19:44:49.431Z
  */
-'use strict';
-
 var DEFAULTS = {
   /**
    * Indicates if output the original image instead of the compressed one
@@ -554,16 +552,16 @@ function dataURLtoBlob(dataURL) {
   return new Blob([bytes], { type: mime });
 }
 
-const { FileReader, URL, Compressor: AnotherCompressor } = WINDOW;
+const { FileReader, URL, PixSqueeze: AnotherPixSqueeze } = WINDOW;
 const REGEXP_EXTENSION = /\.\w+$/;
 
 /**
  * Creates a new image compressor.
  * @class
  */
-class Compressor {
+class PixSqueeze {
   /**
-   * The constructor of Compressor.
+   * The constructor of PixSqueeze.
    * @param {File|Blob} file - The target image file for compressing.
    * @param {Object} [options] - The options for compressing.
    */
@@ -912,11 +910,11 @@ class Compressor {
 
   /**
    * Get the no conflict compressor class.
-   * @returns {Compressor} The compressor class.
+   * @returns {PixSqueeze} The compressor class.
    */
   static noConflict() {
-    window.Compressor = AnotherCompressor;
-    return Compressor;
+    window.PixSqueeze = AnotherPixSqueeze;
+    return PixSqueeze;
   }
 
   /**
@@ -928,4 +926,4 @@ class Compressor {
   }
 }
 
-module.exports = Compressor;
+export { PixSqueeze as default };

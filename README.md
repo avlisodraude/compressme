@@ -1,6 +1,6 @@
-# Compressme
+# PixSqueeze
 
-[![Coverage Status](https://img.shields.io/codecov/c/github/avlisodraude/compressme.svg)](https://codecov.io/gh/avlisodraude/compressme) [![Downloads](https://img.shields.io/npm/dm/compressme.svg)](https://www.npmjs.com/package/compressme) [![Version](https://img.shields.io/npm/v/compressme.svg)](https://www.npmjs.com/package/compressme) [![Gzip Size](https://img.shields.io/bundlephobia/minzip/compressme.svg)](https://unpkg.com/compressme/dist/compressme.common.js)
+[![Coverage Status](https://img.shields.io/codecov/c/github/avlisodraude/compressme.svg)](https://codecov.io/gh/avlisodraude/compressme) [![Downloads](https://img.shields.io/npm/dm/pixsqueeze.svg)](https://www.npmjs.com/package/pixsqueeze) [![Version](https://img.shields.io/npm/v/pixsqueeze.svg)](https://www.npmjs.com/package/pixsqueeze) [![Gzip Size](https://img.shields.io/bundlephobia/minzip/pixsqueeze.svg)](https://unpkg.com/pixsqueeze/dist/pixsqueeze.common.js)
 
 > JavaScript image compressor with server-side conversion for HEIC, TIFF, and camera RAW formats. The client-side compression uses the browser's native [HTMLCanvasElement.toBlob()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) method — **lossy**, **asynchronous**, and behaviour varies across browsers. Precompress images on the client side before uploading, with automatic server-assisted pre-conversion for formats browsers cannot natively read.
 
@@ -24,10 +24,10 @@
 
 ```text
 dist/
-├── compressme.js        (UMD)
-├── compressme.min.js    (UMD, compressed)
-├── compressme.common.js (CommonJS, default)
-└── compressme.esm.js    (ES Module)
+├── pixsqueeze.js        (UMD)
+├── pixsqueeze.min.js    (UMD, compressed)
+├── pixsqueeze.common.js (CommonJS, default)
+└── pixsqueeze.esm.js    (ES Module)
 ```
 
 ## Getting started
@@ -35,7 +35,7 @@ dist/
 ### Install
 
 ```shell
-npm install compressme
+npm install pixsqueeze
 ```
 
 ### Usage
@@ -43,7 +43,7 @@ npm install compressme
 #### Syntax
 
 ```js
-new Compressor(file[, options])
+new PixSqueeze(file[, options])
 ```
 
 **file**
@@ -66,7 +66,7 @@ The options for compressing. Check out the available [options](#options).
 ```
 
 ```js
-import Compressor from "compressme";
+import PixSqueeze from "pixsqueeze";
 
 document.getElementById("file").addEventListener("change", (e) => {
   const file = e.target.files[0];
@@ -75,7 +75,7 @@ document.getElementById("file").addEventListener("change", (e) => {
     return;
   }
 
-  new Compressor(file, {
+  new PixSqueeze(file, {
     quality: 0.6,
 
     // The compression process is asynchronous,
@@ -183,8 +183,8 @@ curl -X POST http://localhost:3000/api/convert/raw \
 
 ## Options
 
-You may set compressor options with `new Compressor(file, options)`.
-If you want to change the global default options, You may use `Compressor.setDefaults(options)`.
+You may set compressor options with `new PixSqueeze(file, options)`.
+If you want to change the global default options, You may use `PixSqueeze.setDefaults(options)`.
 
 ### strict
 
@@ -347,7 +347,7 @@ Files whose file type is included in the `convertTypes` list, and whose file siz
 The hook function to execute before drawing the image into the canvas for compression.
 
 ```js
-new Compressor(file, {
+new PixSqueeze(file, {
   beforeDraw(context, canvas) {
     context.fillStyle = "#fff";
     context.fillRect(0, 0, canvas.width, canvas.height);
@@ -367,7 +367,7 @@ new Compressor(file, {
 The hook function to execute after drawing the image into the canvas for compression.
 
 ```js
-new Compressor(file, {
+new PixSqueeze(file, {
   drew(context, canvas) {
     context.fillStyle = "#fff";
     context.font = "2rem serif";
@@ -403,7 +403,7 @@ The hook function executes when fails to compress the image.
 Abort the compression process.
 
 ```js
-const compressor = new Compressor(file);
+const compressor = new PixSqueeze(file);
 
 // Do something...
 compressor.abort();
@@ -411,14 +411,14 @@ compressor.abort();
 
 ## No conflict
 
-If you have to use another compressor with the same namespace, just call the `Compressor.noConflict` static method to revert to it.
+If you have to use another compressor with the same namespace, just call the `PixSqueeze.noConflict` static method to revert to it.
 
 ```html
 <script src="other-compressor.js"></script>
-<script src="compressor.js"></script>
+<script src="pixsqueeze.js"></script>
 <script>
-  Compressor.noConflict();
-  // Code that uses other `Compressor` can follow here.
+  PixSqueeze.noConflict();
+  // Code that uses other `PixSqueeze` can follow here.
 </script>
 ```
 

@@ -1,10 +1,10 @@
-# Contributing to Compressor.js
+# Contributing to PixSqueeze.js
 
 > Based on [Angular's contributing guidelines](https://github.com/angular/angular/blob/master/CONTRIBUTING.md).
 
-We would love for you to contribute to Compressor.js and help make it even better than it is today! As a contributor, here are the guidelines we would like you to follow:
+We would love for you to contribute to PixSqueeze.js and help make it even better than it is today! As a contributor, here are the guidelines we would like you to follow:
 
-- [Contributing to Compressor.js](#contributing-to-compressorjs)
+- [Contributing to PixSqueeze.js](#contributing-to-pixsqueezejs)
   - [Code of Conduct](#code-of-conduct)
   - [Question or Problem](#question-or-problem)
   - [Issues and Bugs](#issues-and-bugs)
@@ -25,7 +25,7 @@ We would love for you to contribute to Compressor.js and help make it even bette
 
 ## Code of Conduct
 
-Help us keep Compressor.js open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+Help us keep PixSqueeze.js open and inclusive. Please read and follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Question or Problem
 
@@ -60,7 +60,7 @@ Before you submit an issue, please search the [issue tracker](https://github.com
 
 We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it. To reproduce bugs, we will systematically ask you to provide a minimal reproduction scenario using [CodePen](https://codepen.io/pen). Having a live, reproducible scenario gives us a wealth of important information without going back & forth to you with additional questions like:
 
-- version of Compressor.js used
+- version of PixSqueeze.js used
 - 3rd-party libraries and their versions
 - and most importantly - a use-case that fails
 
@@ -86,7 +86,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 
 1. Create your patch, **including appropriate test cases**.
 1. Follow our [Coding Rules](#coding-rules).
-1. Run the full Compressor.js test suite, and ensure that all tests pass.
+1. Run the full PixSqueeze.js test suite, and ensure that all tests pass.
 1. Commit your changes using a descriptive commit message that follows our [Commit Message Guidelines](#commit-message-guidelines). Adherence to these guidelines is necessary because release notes are automatically generated from these messages.
 
     ```shell
@@ -103,7 +103,7 @@ Before you submit your Pull Request (PR) consider the following guidelines:
 1. In GitHub, send a pull request to `compressorjs:main`.
 1. If we suggest changes then:
     - Make the required updates.
-    - Re-run the Compressor.js test suites to ensure tests are still passing.
+    - Re-run the PixSqueeze.js test suites to ensure tests are still passing.
     - Rebase your branch and force push to your GitHub repository (this will update your Pull Request):
 
     ```shell

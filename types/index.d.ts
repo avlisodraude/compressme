@@ -1,4 +1,4 @@
-declare namespace Compressor {
+declare namespace PixSqueeze {
   export interface Options {
     strict?: boolean;
     checkOrientation?: boolean;
@@ -21,13 +21,13 @@ declare namespace Compressor {
   }
 }
 
-declare class Compressor {
-  constructor(file: File | Blob, options?: Compressor.Options);
+declare class PixSqueeze {
+  constructor(file: File | Blob, options?: PixSqueeze.Options);
   abort(): void;
-  static noConflict(): Compressor;
-  static setDefaults(options: Compressor.Options): void;
+  static noConflict(): PixSqueeze;
+  static setDefaults(options: PixSqueeze.Options): void;
 }
 
 declare module 'compressorjs' {
-  export default Compressor;
+  export default PixSqueeze;
 }

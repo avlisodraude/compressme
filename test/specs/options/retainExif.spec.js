@@ -12,7 +12,7 @@ function blobToArrayBuffer(blob, callback) {
 describe('retainExif', () => {
   it('should not retain the Exif information', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.jpg', (image) => {
-      new Compressor(image, {
+      new PixSqueeze(image, {
         success(result) {
           blobToArrayBuffer(result, (arrayBuffer) => {
             expect(getExif(arrayBuffer)).to.be.empty;
@@ -25,7 +25,7 @@ describe('retainExif', () => {
 
   it('should retain the Exif information', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.jpg', (image) => {
-      new Compressor(image, {
+      new PixSqueeze(image, {
         retainExif: true,
         success(result) {
           blobToArrayBuffer(result, (arrayBuffer) => {

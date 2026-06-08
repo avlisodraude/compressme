@@ -326,7 +326,7 @@ app.use(express.static(path.join(__dirname, '..', 'docs'), {
 // ─── Start ───────────────────────────────────────────────────────────────────
 
 app.listen(PORT, () => {
-  console.log(`Compressor.js demo server running at http://localhost:${PORT}`);
+  console.log(`PixSqueeze.js demo server running at http://localhost:${PORT}`);
   console.log(`HEIC conversion endpoint: POST http://localhost:${PORT}/api/convert/heic`);
   console.log(`TIFF conversion endpoint: POST http://localhost:${PORT}/api/convert/tiff`);
   console.log(`RAW  conversion endpoint: POST http://localhost:${PORT}/api/convert/raw`);

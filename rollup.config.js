@@ -4,7 +4,7 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const pkg = require('./package.json');
 
 const libName = pkg.name.replace('js', '');
-const name = libName.charAt(0).toUpperCase() + libName.slice(1);
+const name = 'PixSqueeze';
 const banner = `/*!
  * ${name}.js v${pkg.version}
  * ${pkg.homepage}

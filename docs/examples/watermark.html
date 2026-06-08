@@ -81,19 +81,19 @@
   <script src="../js/compressor.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', function () {
-      var Compressor = window.Compressor;
+      var PixSqueeze = window.PixSqueeze;
       var URL = window.URL || window.webkitURL;
       var image = document.getElementById('image');
       var output = document.getElementById('output');
       var xhr = new XMLHttpRequest();
 
       xhr.onload = function () {
-        new Compressor(xhr.response, {
+        new PixSqueeze(xhr.response, {
           strict: false,
           drew: function (context, canvas) {
             context.fillStyle = '#fff';
             context.font = '2rem serif';
-            context.fillText('Powered by Compressor.js', 20, canvas.height - 20);
+            context.fillText('Powered by PixSqueeze.js', 20, canvas.height - 20);
           },
           success: function (result) {
             var newImage = new Image();

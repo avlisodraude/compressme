@@ -1,7 +1,7 @@
 describe('abort', () => {
   it('should abort the compressing process before read', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.jpg', (image) => {
-      const compressor = new Compressor(image, {
+      const compressor = new PixSqueeze(image, {
         success() {
           expect.fail(1, 0);
         },
@@ -18,7 +18,7 @@ describe('abort', () => {
 
   it('should abort the compressing process before load', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.jpg', (image) => {
-      const compressor = new Compressor(image, {
+      const compressor = new PixSqueeze(image, {
         checkOrientation: false,
         success() {
           expect.fail(1, 0);
@@ -36,7 +36,7 @@ describe('abort', () => {
 
   it('should abort the compressing process before draw', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.jpg', (image) => {
-      new Compressor(image, {
+      new PixSqueeze(image, {
         beforeDraw() {
           this.abort();
         },
@@ -53,7 +53,7 @@ describe('abort', () => {
 
   it('should abort the compressing process after drew', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.jpg', (image) => {
-      new Compressor(image, {
+      new PixSqueeze(image, {
         drew() {
           this.abort();
         },
@@ -70,7 +70,7 @@ describe('abort', () => {
 
   it('should abort the compressing process before output', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.jpg', (image) => {
-      new Compressor(image, {
+      new PixSqueeze(image, {
         drew() {
           setTimeout(() => {
             this.abort();
@@ -90,7 +90,7 @@ describe('abort', () => {
   it('should only can be aborted once', (done) => {
     window.loadImageAsBlob('/base/docs/images/picture.jpg', (image) => {
       let count = 0;
-      const compressor = new Compressor(image, {
+      const compressor = new PixSqueeze(image, {
         error() {
           count += 1;
           compressor.abort();

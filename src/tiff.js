@@ -2,7 +2,7 @@
  * TIFF client-side utilities
  *
  * Detects TIFF files and converts them via the server-side endpoint before
- * passing the result to Compressor.js.
+ * passing the result to PixSqueeze.js.
  *
  * Usage:
  *   import { isTiffFile, convertTiffOnServer } from './tiff.js';
@@ -11,7 +11,7 @@
  *     if (await isTiffFile(file)) {
  *       file = await convertTiffOnServer(file);
  *     }
- *     new Compressor(file, options);
+ *     new PixSqueeze(file, options);
  *   }
  */
 
@@ -51,7 +51,7 @@ export async function isTiffFile(file) {
 
 /**
  * Upload a TIFF file to the server conversion endpoint and get back a
- * standard JPEG File object ready to pass into Compressor.js.
+ * standard JPEG File object ready to pass into PixSqueeze.js.
  *
  * @param {File|Blob} file - The TIFF file to convert.
  * @param {string} [endpoint='/api/convert/tiff'] - Override the server URL if needed.
