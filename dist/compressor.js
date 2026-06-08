@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2026-06-08T06:57:27.869Z
+ * Date: 2026-06-08T09:14:43.573Z
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -231,7 +231,12 @@
    * @link https://github.com/nodeca/pica/blob/master/lib/utils.js
    * @returns {boolean} Returns `true` if it is available, else `false`.
    */
+  // Cached result — the canvas probe result never changes within a page session.
+  let canvasAvailableCache;
+
   function isCanvasAvailable() {
+    if (canvasAvailableCache !== undefined) return canvasAvailableCache;
+
     try {
       const canvas = document.createElement('canvas');
 
@@ -240,7 +245,10 @@
 
       const context = canvas.getContext('2d');
 
-      if (!context) return false;
+      if (!context) {
+        canvasAvailableCache = false;
+        return false;
+      }
 
       // Create 2x1 image data containing RGBA values for two pixels
       const imageData = context.createImageData(2, 1);
@@ -265,10 +273,12 @@
       const expected = [12, 23, 34, 255, 45, 56, 67, 255];
 
       // Compare element by element to ensure write and read consistency
-      return readBack.data.every((value, index) => value === expected[index]);
+      canvasAvailableCache = readBack.data.every((value, index) => value === expected[index]);
     } catch (error) {
-      return false;
+      canvasAvailableCache = false;
     }
+
+    return canvasAvailableCache;
   }
 
   const { btoa } = WINDOW;
@@ -487,14 +497,16 @@
    * @returns {Array} The read Exif information.
    */
   function getExif(arrayBuffer) {
-    const array = toArray(new Uint8Array(arrayBuffer));
-    const { length } = array;
-    const segments = [];
+    // Work directly on the typed array — avoids copying the entire image buffer
+    // into a plain JS Array (which was the previous toArray() call).
+    const uint8 = new Uint8Array(arrayBuffer);
+    const { length } = uint8;
+    const exifSegments = [];
     let start = 0;
 
     while (start + 3 < length) {
-      const value = array[start];
-      const next = array[start + 1];
+      const value = uint8[start];
+      const next = uint8[start + 1];
 
       // SOS (Start of Scan)
       if (value === 0xFF && next === 0xDA) {
@@ -505,22 +517,37 @@
       if (value === 0xFF && next === 0xD8) {
         start += 2;
       } else {
-        const offset = array[start + 2] * 256 + array[start + 3];
+        const offset = uint8[start + 2] * 256 + uint8[start + 3];
         const end = start + offset + 2;
-        const segment = array.slice(start, end);
 
-        segments.push(segment);
+        // Collect only APP1 (0xFF 0xE1) segments — those carry Exif data.
+        // Slicing here is intentional: we keep only the small Exif segments,
+        // not the full image, so total memory is proportional to Exif size.
+        if (value === 0xFF && next === 0xE1) {
+          exifSegments.push(uint8.slice(start, end));
+        }
+
         start = end;
       }
     }
 
-    return segments.reduce((exifArray, current) => {
-      if (current[0] === 0xFF && current[1] === 0xE1) {
-        return exifArray.concat(current);
-      }
+    // Flatten the collected Uint8Array segments into a single plain Array
+    // (the return type expected by insertExif).
+    if (exifSegments.length === 0) return [];
 
-      return exifArray;
-    }, []);
+    let totalLength = 0;
+
+    for (const seg of exifSegments) totalLength += seg.length;
+
+    const result = new Uint8Array(totalLength);
+    let pos = 0;
+
+    for (const seg of exifSegments) {
+      result.set(seg, pos);
+      pos += seg.length;
+    }
+
+    return Array.from(result);
   }
 
   /**
@@ -530,16 +557,26 @@
    * @returns {ArrayBuffer} The transformed array buffer.
    */
   function insertExif(arrayBuffer, exifArray) {
-    const array = toArray(new Uint8Array(arrayBuffer));
+    // Work directly on the typed array — avoids copying the entire compressed
+    // JPEG buffer into a plain JS Array before building the output.
+    const src = new Uint8Array(arrayBuffer);
 
-    if (array[2] !== 0xFF || array[3] !== 0xE0) {
+    if (src[2] !== 0xFF || src[3] !== 0xE0) {
       return arrayBuffer;
     }
 
-    const app0Length = array[4] * 256 + array[5];
-    const newArrayBuffer = [0xFF, 0xD8].concat(exifArray, array.slice(4 + app0Length));
+    const app0Length = src[2 + 2] * 256 + src[2 + 3]; // bytes 4–5
+    const bodyStart = 4 + app0Length;                  // skip SOI (2) + APP0
+    const bodyLength = src.length - bodyStart;
 
-    return new Uint8Array(newArrayBuffer);
+    // Output layout: SOI (2) + Exif segments + remainder of JPEG
+    const out = new Uint8Array(2 + exifArray.length + bodyLength);
+    out[0] = 0xFF;
+    out[1] = 0xD8;
+    out.set(exifArray, 2);
+    out.set(src.subarray(bodyStart), 2 + exifArray.length);
+
+    return out.buffer;
   }
 
   /**
