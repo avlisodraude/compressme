@@ -2,33 +2,82 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Compressor.js</title>
-  <link rel="stylesheet" href="https://unpkg.com/bootstrap@4/dist/css/bootstrap.min.css" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grayscale — Compressme</title>
   <style>
-    img {
-      width: 100%;
+    :root {
+      --font: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --bg: #f8f9fb; --surface: #ffffff; --border: #e2e6ec; --border-2: #c8cfd9;
+      --text: #111827; --text-2: #4b5563; --text-3: #9ca3af;
+      --accent: #4f46e5; --accent-h: #4338ca; --accent-bg: #eef2ff;
+      --radius: 10px; --radius-lg: 16px;
+      --shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 16px rgba(0,0,0,.05);
     }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#0f1117; --surface:#1a1d27; --border:#2a2d3a; --border-2:#3a3d4a; --text:#f3f4f6; --text-2:#9ca3af; --text-3:#6b7280; --accent:#6366f1; --accent-h:#818cf8; --accent-bg:#1e1b4b; }
+    }
+    html[data-theme="dark"]  { --bg:#0f1117; --surface:#1a1d27; --border:#2a2d3a; --border-2:#3a3d4a; --text:#f3f4f6; --text-2:#9ca3af; --text-3:#6b7280; --accent:#6366f1; --accent-h:#818cf8; --accent-bg:#1e1b4b; }
+    html[data-theme="light"] { --bg:#f8f9fb; --surface:#ffffff; --border:#e2e6ec; --border-2:#c8cfd9; --text:#111827; --text-2:#4b5563; --text-3:#9ca3af; --accent:#4f46e5; --accent-h:#4338ca; --accent-bg:#eef2ff; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+    .nav-bar { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .nav-back { font-size: 0.875rem; color: var(--text-2); text-decoration: none; display: flex; align-items: center; gap: 0.35rem; padding: 0.3rem 0.6rem; border-radius: 6px; transition: background 0.15s, color 0.15s; }
+    .nav-back:hover { background: var(--accent-bg); color: var(--accent); }
+    .nav-title { font-weight: 700; font-size: 1rem; color: var(--text); }
+    .theme-btn { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; border: 1.5px solid var(--border-2); background: transparent; color: var(--text-2); cursor: pointer; transition: background 0.15s, border-color 0.15s, color 0.15s; flex-shrink: 0; }
+    .theme-btn:hover { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
+    .theme-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .theme-btn .icon-sun  { display: none; }
+    .theme-btn .icon-moon { display: block; }
+    html[data-theme="dark"] .theme-btn .icon-sun  { display: block; }
+    html[data-theme="dark"] .theme-btn .icon-moon { display: none; }
+    .main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .page-title { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0 1.75rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; }
+    .card-header { padding: 0.875rem 1.25rem; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 0.9375rem; color: var(--text); }
+    .card-body { padding: 1.25rem; }
+    .card-body img { width: 100%; display: block; border-radius: 8px; }
+    .placeholder { color: var(--text-3); font-size: 0.875rem; padding: 3rem; text-align: center; display: block; }
   </style>
 </head>
 <body>
-  <div class="container py-5">
-    <h1>Grayscale</h1>
-    <hr>
-    <div class="row">
-      <div class="col">
-        <h3>Input</h3>
-        <div id="input">
-          <img id="image" src="../images/picture.png" alt="Picture">
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a class="nav-back" href="../index.html">
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        Compressme
+      </a>
+      <span class="nav-title">Grayscale</span>
+      <button class="theme-btn" id="themeToggle" aria-label="Toggle dark / light mode">
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun"  viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <main class="main">
+    <p class="page-title">Grayscale</p>
+    <hr class="divider">
+    <div class="grid">
+      <div class="card">
+        <div class="card-header">Input</div>
+        <div class="card-body">
+          <div id="input"><img id="image" src="../images/alosha.png" alt="Picture"></div>
         </div>
       </div>
-      <div class="col">
-        <h3>Output</h3>
-        <div id="output"></div>
+      <div class="card">
+        <div class="card-header">Output</div>
+        <div class="card-body">
+          <div id="output"><span class="placeholder">Processing…</span></div>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
   <script src="../js/compressor.js"></script>
   <script>
     window.addEventListener('DOMContentLoaded', function () {
@@ -49,6 +98,7 @@
 
             newImage.src = URL.createObjectURL(result);
             newImage.alt = 'Compressed image';
+            output.innerHTML = '';
             output.appendChild(newImage);
           },
           error: function (err) {
@@ -61,6 +111,21 @@
       xhr.responseType = 'blob';
       xhr.send();
     });
+  </script>
+  <script>
+    (function () {
+      var html = document.documentElement;
+      var btn = document.getElementById('themeToggle');
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      html.setAttribute('data-theme', theme);
+      btn.addEventListener('click', function () {
+        theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+      });
+    })();
   </script>
 </body>
 </html>
