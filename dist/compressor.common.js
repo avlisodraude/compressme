@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2026-06-08T09:55:24.438Z
+ * Date: 2026-06-08T10:57:32.035Z
  */
 'use strict';
 
@@ -618,7 +618,7 @@ class Compressor {
     const checkOrientation = isJPEGImage && options.checkOrientation;
     const retainExif = isJPEGImage && options.retainExif;
 
-    if (URL && !checkOrientation && !retainExif) {
+    if (!checkOrientation && !retainExif) {
       this.load({
         url: URL.createObjectURL(file),
       });
@@ -646,12 +646,7 @@ class Compressor {
         }
 
         if (checkOrientation || retainExif) {
-          if (
-            !URL
-
-            // Generate a new URL with the default orientation value 1.
-            || orientation > 1
-          ) {
+          if (orientation > 1) {
             data.url = arrayBufferToDataURL(result, mimeType);
           } else {
             data.url = URL.createObjectURL(file);

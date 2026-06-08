@@ -166,13 +166,11 @@ app.post('/api/convert/heic', async (req, res) => {
 
     const outputName = (originalname || 'image.heic').replace(/\.heic$/i, '.jpg');
 
-    res.set('Content-Type', 'image/jpeg');
-    res.set('X-Original-Name', outputName);
-    res.set('Content-Length', outputBuffer.byteLength);
+    res.set({ 'Content-Type': 'image/jpeg', 'X-Original-Name': outputName, 'Content-Length': outputBuffer.byteLength });
     return res.send(Buffer.from(outputBuffer));
   } catch (err) {
     console.error('[HEIC convert] error:', err.message);
-    return res.status(422).json({ error: 'Failed to convert HEIC image: ' + err.message });
+    return res.status(422).json({ error: `Failed to convert HEIC image: ${err.message}` });
   }
 });
 
@@ -259,13 +257,11 @@ app.post('/api/convert/tiff', async (req, res) => {
     const outputBuffer = await sharpToJpeg(buffer);
     const outputName = (originalname || 'image.tiff').replace(/\.tiff?$/i, '.jpg');
 
-    res.set('Content-Type', 'image/jpeg');
-    res.set('X-Original-Name', outputName);
-    res.set('Content-Length', outputBuffer.byteLength);
+    res.set({ 'Content-Type': 'image/jpeg', 'X-Original-Name': outputName, 'Content-Length': outputBuffer.byteLength });
     return res.send(outputBuffer);
   } catch (err) {
     console.error('[TIFF convert] error:', err.message);
-    return res.status(422).json({ error: 'Failed to convert TIFF image: ' + err.message });
+    return res.status(422).json({ error: `Failed to convert TIFF image: ${err.message}` });
   }
 });
 
@@ -309,13 +305,11 @@ app.post('/api/convert/raw', async (req, res) => {
     const outputBuffer = await sharpToJpeg(buffer);
     const outputName = (originalname || 'image.dng').replace(RAW_EXT_RE, '.jpg');
 
-    res.set('Content-Type', 'image/jpeg');
-    res.set('X-Original-Name', outputName);
-    res.set('Content-Length', outputBuffer.byteLength);
+    res.set({ 'Content-Type': 'image/jpeg', 'X-Original-Name': outputName, 'Content-Length': outputBuffer.byteLength });
     return res.send(outputBuffer);
   } catch (err) {
     console.error('[RAW convert] error:', err.message);
-    return res.status(422).json({ error: 'Failed to convert RAW image: ' + err.message });
+    return res.status(422).json({ error: `Failed to convert RAW image: ${err.message}` });
   }
 });
 

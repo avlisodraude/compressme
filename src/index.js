@@ -70,7 +70,7 @@ export default class Compressor {
     const checkOrientation = isJPEGImage && options.checkOrientation;
     const retainExif = isJPEGImage && options.retainExif;
 
-    if (URL && !checkOrientation && !retainExif) {
+    if (!checkOrientation && !retainExif) {
       this.load({
         url: URL.createObjectURL(file),
       });
@@ -98,12 +98,7 @@ export default class Compressor {
         }
 
         if (checkOrientation || retainExif) {
-          if (
-            !URL
-
-            // Generate a new URL with the default orientation value 1.
-            || orientation > 1
-          ) {
+          if (orientation > 1) {
             data.url = arrayBufferToDataURL(result, mimeType);
           } else {
             data.url = URL.createObjectURL(file);
