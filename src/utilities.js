@@ -1,5 +1,3 @@
-import { WINDOW } from './constants';
-
 /**
  * Check if the given value is a positive number.
  * @param {*} value - The value to check.
