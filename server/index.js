@@ -1,11 +1,53 @@
 'use strict';
 
+const os = require('os');
 const path = require('path');
 const { Worker } = require('worker_threads');
 const express = require('express');
 const compression = require('compression');
 const multer = require('multer');
 const sharp = require('sharp');
+
+// ─── sharp concurrency ────────────────────────────────────────────────────────
+
+const CPU_COUNT = os.cpus().length;
+
+// Each sharp pipeline runs libvips on CPU_COUNT threads by default.
+// Cap to half the CPUs so concurrent conversions and the HEIC worker still
+// have cores available, and Node.js event-loop latency stays low.
+const SHARP_THREADS = Math.max(1, Math.ceil(CPU_COUNT / 2));
+sharp.concurrency(SHARP_THREADS);
+
+// Allow at most SHARP_THREADS pipelines to run simultaneously.
+// Requests beyond this limit queue here instead of all contending for CPU at once.
+class Semaphore {
+  constructor(limit) {
+    this._limit = limit;
+    this._active = 0;
+    this._queue = [];
+  }
+
+  acquire() {
+    return new Promise((resolve) => {
+      if (this._active < this._limit) {
+        this._active += 1;
+        resolve();
+      } else {
+        this._queue.push(resolve);
+      }
+    });
+  }
+
+  release() {
+    this._active -= 1;
+    if (this._queue.length > 0) {
+      this._active += 1;
+      this._queue.shift()();
+    }
+  }
+}
+
+const sharpSem = new Semaphore(SHARP_THREADS);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -173,7 +215,12 @@ function isRw2Buffer(buffer) {
  * `.rotate()` applies any embedded orientation metadata automatically.
  */
 async function sharpToJpeg(buffer) {
-  return sharp(buffer).rotate().jpeg({ quality: 95 }).toBuffer();
+  await sharpSem.acquire();
+  try {
+    return await sharp(buffer).rotate().jpeg({ quality: 95 }).toBuffer();
+  } finally {
+    sharpSem.release();
+  }
 }
 
 // ─── Routes ──────────────────────────────────────────────────────────────────
