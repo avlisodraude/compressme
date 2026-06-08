@@ -241,10 +241,10 @@ window.addEventListener('DOMContentLoaded', function () {
 
         blob.lastModified = date.getTime();
         blob.lastModifiedDate = date;
-        blob.name = 'picture.jpg';
+        blob.name = 'alosha.png';
         vm.compress(blob);
       };
-      xhr.open('GET', 'images/picture.jpg');
+      xhr.open('GET', 'images/alosha.png');
       xhr.responseType = 'blob';
       xhr.send();
     },
