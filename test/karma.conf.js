@@ -49,9 +49,6 @@ module.exports = async (config) => {
         timeout: 10000,
       },
     },
-    coverageIstanbulReporter: {
-      reports: ['html', 'lcovonly', 'text-summary'],
-    },
     files: [
       'src/index.js',
       'test/helpers.js',
@@ -71,7 +68,7 @@ module.exports = async (config) => {
       'test/helpers.js': ['rollup'],
       'test/specs/**/*.spec.js': ['rollup'],
     },
-    reporters: ['mocha', 'coverage-istanbul'],
+    reporters: ['mocha'],
     singleRun: true,
   });
 };

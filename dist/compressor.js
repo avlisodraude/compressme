@@ -5,7 +5,7 @@
  * Copyright 2018-present Chen Fengyuan
  * Released under the MIT license
  *
- * Date: 2026-06-08T09:26:59.970Z
+ * Date: 2026-06-08T09:40:20.761Z
  */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -545,13 +545,13 @@
       pos += seg.length;
     }
 
-    return Array.from(result);
+    return result;
   }
 
   /**
    * Insert Exif information into the given array buffer.
    * @param {ArrayBuffer} arrayBuffer - The array buffer to transform.
-   * @param {Array} exifArray - The Exif information to insert.
+   * @param {Uint8Array} exifArray - The Exif data (returned by getExif).
    * @returns {ArrayBuffer} The transformed array buffer.
    */
   function insertExif(arrayBuffer, exifArray) {
@@ -609,7 +609,7 @@
   }
 
   const { ArrayBuffer, FileReader } = WINDOW;
-  const URL = WINDOW.URL || WINDOW.webkitURL;
+  const URL = WINDOW.URL;
   const REGEXP_EXTENSION = /\.\w+$/;
   const AnotherCompressor = WINDOW.Compressor;
 
@@ -941,11 +941,7 @@
         }
       };
 
-      if (canvas.toBlob) {
-        canvas.toBlob(callback, options.mimeType, options.quality);
-      } else {
-        callback(dataURLtoBlob(canvas.toDataURL(options.mimeType, options.quality)));
-      }
+      canvas.toBlob(callback, options.mimeType, options.quality);
     }
 
     done({
@@ -987,21 +983,9 @@
             );
           }
 
-          try {
-            // Convert the resulting Blob object into a File object for modern browsers.
-            result = new File([result], fileName, {
-              type: result.type,
-            });
-          } catch (error) {
-            // Fallback to Blob if the File constructor is not supported.
-            const date = new Date();
-
-            result.name = fileName;
-
-            // The last modified date is not accurate, but it's better than nothing.
-            result.lastModified = date.getTime();
-            result.lastModifiedDate = date;
-          }
+          result = new File([result], fileName, {
+            type: result.type,
+          });
         }
       } else {
         // Returns original file if the result is null in some cases.

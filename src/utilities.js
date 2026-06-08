@@ -388,13 +388,13 @@ export function getExif(arrayBuffer) {
     pos += seg.length;
   }
 
-  return Array.from(result);
+  return result;
 }
 
 /**
  * Insert Exif information into the given array buffer.
  * @param {ArrayBuffer} arrayBuffer - The array buffer to transform.
- * @param {Array} exifArray - The Exif information to insert.
+ * @param {Uint8Array} exifArray - The Exif data (returned by getExif).
  * @returns {ArrayBuffer} The transformed array buffer.
  */
 export function insertExif(arrayBuffer, exifArray) {

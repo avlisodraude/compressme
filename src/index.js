@@ -19,7 +19,7 @@ import {
 } from './utilities';
 
 const { ArrayBuffer, FileReader } = WINDOW;
-const URL = WINDOW.URL || WINDOW.webkitURL;
+const URL = WINDOW.URL;
 const REGEXP_EXTENSION = /\.\w+$/;
 const AnotherCompressor = WINDOW.Compressor;
 
@@ -351,11 +351,7 @@ export default class Compressor {
       }
     };
 
-    if (canvas.toBlob) {
-      canvas.toBlob(callback, options.mimeType, options.quality);
-    } else {
-      callback(dataURLtoBlob(canvas.toDataURL(options.mimeType, options.quality)));
-    }
+    canvas.toBlob(callback, options.mimeType, options.quality);
   }
 
   done({
@@ -397,21 +393,9 @@ export default class Compressor {
           );
         }
 
-        try {
-          // Convert the resulting Blob object into a File object for modern browsers.
-          result = new File([result], fileName, {
-            type: result.type,
-          });
-        } catch (error) {
-          // Fallback to Blob if the File constructor is not supported.
-          const date = new Date();
-
-          result.name = fileName;
-
-          // The last modified date is not accurate, but it's better than nothing.
-          result.lastModified = date.getTime();
-          result.lastModifiedDate = date;
-        }
+        result = new File([result], fileName, {
+          type: result.type,
+        });
       }
     } else {
       // Returns original file if the result is null in some cases.
