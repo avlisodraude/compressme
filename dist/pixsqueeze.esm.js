@@ -1,11 +1,11 @@
 /*!
- * PixSqueeze.js v1.3.0
+ * PixSqueeze.js v1.3.1
  * https://avlisodraude.github.io/compressme
  *
  * Copyright 2018-present Eduardo Silva Navarrete
  * Released under the MIT license
  *
- * Date: 2026-06-08T19:48:37.837Z
+ * Date: 2026-06-09T15:58:08.230Z
  */
 var DEFAULTS = {
   /**
@@ -493,10 +493,10 @@ function getExif(arrayBuffer) {
   const result = new Uint8Array(totalLength);
   let pos = 0;
 
-  for (const seg of exifSegments) {
+  exifSegments.forEach((seg) => {
     result.set(seg, pos);
     pos += seg.length;
-  }
+  });
 
   return result;
 }
@@ -517,7 +517,7 @@ function insertExif(arrayBuffer, exifArray) {
   }
 
   const app0Length = src[2 + 2] * 256 + src[2 + 3]; // bytes 4–5
-  const bodyStart = 4 + app0Length;                  // skip SOI (2) + APP0
+  const bodyStart = 4 + app0Length; // skip SOI (2) + APP0
   const bodyLength = src.length - bodyStart;
 
   // Output layout: SOI (2) + Exif segments + remainder of JPEG

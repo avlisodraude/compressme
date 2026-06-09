@@ -28,8 +28,8 @@ const TIFF_EXT_RE = /\.tiff?$/i;
  *   Little-endian: II*\0  (0x49 0x49 0x2A 0x00)
  *   Big-endian:    MM\0*  (0x4D 0x4D 0x00 0x2A)
  *
- * @param {File|Blob} file
- * @returns {Promise<boolean>}
+ * @param {File|Blob} file - The file to inspect.
+ * @returns {Promise<boolean>} Resolves to `true` if the file matches the expected format.
  */
 export async function isTiffFile(file) {
   if (TIFF_MIME_RE.test(file.type)) return true;
@@ -42,7 +42,7 @@ export async function isTiffFile(file) {
     const b = new Uint8Array(buffer);
     return (b[0] === 0x49 && b[1] === 0x49 && b[2] === 0x2A && b[3] === 0x00)
         || (b[0] === 0x4D && b[1] === 0x4D && b[2] === 0x00 && b[3] === 0x2A);
-  } catch {
+  } catch (e) {
     return false;
   }
 }
@@ -69,7 +69,7 @@ export async function convertTiffOnServer(file, endpoint = '/api/convert/tiff') 
     try {
       const json = await res.json();
       if (json.error) message = json.error;
-    } catch { /* response was not JSON */ }
+    } catch (e) { /* response was not JSON */ }
     throw new Error(`TIFF conversion failed: ${message}`);
   }
 

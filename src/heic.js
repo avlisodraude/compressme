@@ -27,8 +27,8 @@ const HEIC_MIME_RE = /^image\/hei[cf]/i;
  * from the Photos app, so we fall back to reading the first 12 bytes and
  * checking the ISO Base Media File Format `ftyp` box header.
  *
- * @param {File|Blob} file
- * @returns {Promise<boolean>}
+ * @param {File|Blob} file - The file to inspect.
+ * @returns {Promise<boolean>} Resolves to `true` if the file matches the expected format.
  */
 export async function isHeicFile(file) {
   if (HEIC_MIME_RE.test(file.type)) return true;
@@ -42,7 +42,7 @@ export async function isHeicFile(file) {
     const ftyp = String.fromCharCode(bytes[4], bytes[5], bytes[6], bytes[7]);
     const brand = String.fromCharCode(bytes[8], bytes[9], bytes[10], bytes[11]);
     return ftyp === 'ftyp' && /^hei[cfxs]|^hevc|^mif1|^msf1/.test(brand);
-  } catch {
+  } catch (e) {
     return false;
   }
 }
@@ -69,7 +69,7 @@ export async function convertHeicOnServer(file, endpoint = '/api/convert/heic') 
     try {
       const json = await res.json();
       if (json.error) message = json.error;
-    } catch { /* response was not JSON */ }
+    } catch (e) { /* response was not JSON */ }
     throw new Error(`HEIC conversion failed: ${message}`);
   }
 

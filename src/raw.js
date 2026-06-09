@@ -44,8 +44,8 @@ const RAW_EXT_RE = /\.(dng|cr2|cr3|nef|arw|raf|rw2|pef|orf|srw|3fr|dcr|kdc|mrw|n
  *   from regular TIFFs without an extension, so extension detection is
  *   preferred for those formats.
  *
- * @param {File|Blob} file
- * @returns {Promise<boolean>}
+ * @param {File|Blob} file - The file to inspect.
+ * @returns {Promise<boolean>} Resolves to `true` if the file is a camera RAW image.
  */
 export async function isRawFile(file) {
   if (RAW_MIME_RE.test(file.type)) return true;
@@ -63,7 +63,7 @@ export async function isRawFile(file) {
     if (b[0] === 0x49 && b[1] === 0x49 && b[2] === 0x55 && b[3] === 0x00) return true;
 
     return false;
-  } catch {
+  } catch (e) {
     return false;
   }
 }
@@ -90,7 +90,7 @@ export async function convertRawOnServer(file, endpoint = '/api/convert/raw') {
     try {
       const json = await res.json();
       if (json.error) message = json.error;
-    } catch { /* response was not JSON */ }
+    } catch (e) { /* response was not JSON */ }
     throw new Error(`RAW conversion failed: ${message}`);
   }
 

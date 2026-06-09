@@ -340,10 +340,10 @@ export function getExif(arrayBuffer) {
   const result = new Uint8Array(totalLength);
   let pos = 0;
 
-  for (const seg of exifSegments) {
+  exifSegments.forEach((seg) => {
     result.set(seg, pos);
     pos += seg.length;
-  }
+  });
 
   return result;
 }
@@ -364,7 +364,7 @@ export function insertExif(arrayBuffer, exifArray) {
   }
 
   const app0Length = src[2 + 2] * 256 + src[2 + 3]; // bytes 4–5
-  const bodyStart = 4 + app0Length;                  // skip SOI (2) + APP0
+  const bodyStart = 4 + app0Length; // skip SOI (2) + APP0
   const bodyLength = src.length - bodyStart;
 
   // Output layout: SOI (2) + Exif segments + remainder of JPEG

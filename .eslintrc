@@ -9,5 +9,13 @@
     "valid-jsdoc": ["error", {
       "requireReturn": false
     }]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["test/**/*.js"],
+      "globals": {
+        "PixSqueeze": "readonly"
+      }
+    }
+  ]
 }
