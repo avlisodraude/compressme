@@ -6,6 +6,8 @@
   <meta name="description" content="PixSqueeze — JavaScript image compressor with support for HEIC, TIFF, and camera RAW formats.">
   <meta name="author" content="Eduardo Silva Navarrete">
   <title>PixSqueeze</title>
+  <link rel="icon" type="image/png" sizes="128x128" href="images/pixsqueeze-logo-128.png">
+  <link rel="apple-touch-icon" href="images/pixsqueeze-logo-128.png">
   <style>
     /* ── Design tokens ──────────────────────────────────────────────────── */
     :root {
@@ -118,6 +120,15 @@
       font-size: 1rem;
       color: var(--text);
       letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+    .nav-brand img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
     }
 
     .nav-links {
@@ -571,7 +582,10 @@
   <!-- ── Navigation ──────────────────────────────────────────────────────── -->
   <nav class="nav-bar">
     <div class="nav-inner">
-      <span class="nav-brand">PixSqueeze</span>
+      <a class="nav-brand" href="/">
+        <img src="images/pixsqueeze-logo-128.png" alt="PixSqueeze logo">
+        PixSqueeze
+      </a>
       <ul class="nav-links">
         <li><a href="https://github.com/avlisodraude/compressme/blob/main/README.md">Docs</a></li>
         <li>
