@@ -1,0 +1,40 @@
+<svg width="680" height="680" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>PixSqueeze logo</title>
+<desc>PixSqueeze brand logo — image compressor supporting HEIC, TIFF, RAW and more</desc>
+<rect x="0" y="0" width="680" height="680" rx="80" fill="#1a1a2e"/>
+<rect x="140" y="100" width="400" height="340" rx="28" fill="none" stroke="#4f46e5" stroke-width="10"/>
+<rect x="210" y="185" width="260" height="170" rx="18" fill="none" stroke="#818cf8" stroke-width="7"/>
+<line x1="340" y1="108" x2="340" y2="178" stroke="#4f46e5" stroke-width="8" stroke-linecap="round"/>
+<polygon points="340,185 324,162 356,162" fill="#4f46e5"/>
+<line x1="340" y1="432" x2="340" y2="362" stroke="#4f46e5" stroke-width="8" stroke-linecap="round"/>
+<polygon points="340,355 324,378 356,378" fill="#4f46e5"/>
+<line x1="148" y1="270" x2="204" y2="270" stroke="#818cf8" stroke-width="7" stroke-linecap="round"/>
+<polygon points="211,270 191,258 191,282" fill="#818cf8"/>
+<line x1="532" y1="270" x2="476" y2="270" stroke="#818cf8" stroke-width="7" stroke-linecap="round"/>
+<polygon points="469,270 489,258 489,282" fill="#818cf8"/>
+<rect x="232" y="207" width="48" height="48" rx="6" fill="#4f46e5" opacity="0.9"/>
+<rect x="292" y="207" width="48" height="48" rx="6" fill="#6366f1" opacity="0.8"/>
+<rect x="352" y="207" width="48" height="48" rx="6" fill="#818cf8" opacity="0.7"/>
+<rect x="400" y="207" width="28" height="48" rx="6" fill="#a5b4fc" opacity="0.5"/>
+<rect x="232" y="267" width="48" height="46" rx="6" fill="#6366f1" opacity="0.7"/>
+<rect x="292" y="267" width="48" height="46" rx="6" fill="#818cf8" opacity="0.6"/>
+<rect x="352" y="267" width="48" height="46" rx="6" fill="#a5b4fc" opacity="0.5"/>
+<rect x="400" y="267" width="28" height="46" rx="6" fill="#c7d2fe" opacity="0.35"/>
+<defs>
+  <linearGradient id="fadeRight" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="#1a1a2e" stop-opacity="0"/>
+    <stop offset="100%" stop-color="#1a1a2e" stop-opacity="1"/>
+  </linearGradient>
+</defs>
+<rect x="370" y="185" width="100" height="170" fill="url(#fadeRight)" opacity="0.55"/>
+<rect x="167" y="462" width="80" height="30" rx="15" fill="#4f46e5" opacity="0.85"/>
+<text x="207" y="482" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e7ff" text-anchor="middle">HEIC</text>
+<rect x="260" y="462" width="80" height="30" rx="15" fill="#6366f1" opacity="0.75"/>
+<text x="300" y="482" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e7ff" text-anchor="middle">TIFF</text>
+<rect x="353" y="462" width="80" height="30" rx="15" fill="#818cf8" opacity="0.65"/>
+<text x="393" y="482" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e7ff" text-anchor="middle">RAW</text>
+<rect x="446" y="462" width="96" height="30" rx="15" fill="#a5b4fc" opacity="0.5"/>
+<text x="494" y="482" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#e0e7ff" text-anchor="middle">+ more</text>
+<text x="340" y="570" font-family="system-ui, -apple-system, sans-serif" font-size="52" font-weight="700" fill="#f0f0f0" text-anchor="middle" letter-spacing="-1">PixSqueeze</text>
+<text x="340" y="618" font-family="system-ui, sans-serif" font-size="18" font-weight="400" fill="#9ca3af" text-anchor="middle" letter-spacing="0.5">compress · convert · ship</text>
+</svg>
