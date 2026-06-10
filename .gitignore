@@ -3,3 +3,11 @@ coverage
 node_modules
 .DS_Store
 **/.DS_Store
+
+# API environment
+.env
+api/.env
+
+# Private API (separate repo)
+api/
+railway.json
