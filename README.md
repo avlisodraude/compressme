@@ -22,6 +22,7 @@
   - [Cancel an in-progress compression](#cancel-an-in-progress-compression)
 - [Demo server](#demo-server)
 - [Server-side conversion API](#server-side-conversion-api)
+- [Batch API](#batch-api)
 - [Options](#options)
 - [Methods](#methods)
 - [No conflict](#no-conflict)
@@ -391,6 +392,85 @@ Converts camera RAW files to JPEG at quality 95. Automatically applies embedded 
 curl -X POST http://localhost:3000/api/convert/raw \
   -F "file=@DSC_0001.NEF" \
   --output DSC_0001.jpg
+```
+
+[⬆ back to top](#table-of-contents)
+
+## Batch API
+
+Need to compress hundreds or thousands of images server-side — without a browser? The **PixSqueeze Batch API** is a hosted REST API that accepts up to 1,000 images per request and returns compressed results as base64-encoded files.
+
+### Pricing
+
+| Plan       | Images / month | Price      |
+| ---------- | -------------- | ---------- |
+| Free       | 100            | €0         |
+| Starter    | 2,000          | €19 / mo   |
+| Pro        | 20,000         | €49 / mo   |
+| Business   | Unlimited      | €99 / mo   |
+
+### Get an API key
+
+```shell
+curl -X POST https://pixsqueeze-api-production.up.railway.app/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"email":"you@example.com"}'
+```
+
+Response:
+
+```json
+{
+  "apiKey": "psx_...",
+  "plan": "FREE",
+  "monthlyLimit": 100,
+  "message": "Account created. Keep your API key safe — it will not be shown again."
+}
+```
+
+### Compress a batch of images
+
+```shell
+curl -X POST https://pixsqueeze-api-production.up.railway.app/compress/batch \
+  -H "Authorization: Bearer psx_YOUR_API_KEY" \
+  -F "files[]=@photo1.jpg" \
+  -F "files[]=@photo2.heic" \
+  -F "files[]=@scan.tiff" \
+  -F "quality=0.7" \
+  -F "maxWidth=1280"
+```
+
+Response:
+
+```json
+{
+  "processed": 3,
+  "results": [
+    { "originalName": "photo1.jpg", "mimeType": "image/jpeg", "data": "base64..." },
+    { "originalName": "photo2.heic", "mimeType": "image/jpeg", "data": "base64..." },
+    { "originalName": "scan.tiff",  "mimeType": "image/jpeg", "data": "base64..." }
+  ],
+  "usage": { "used": 3, "limit": 100, "remaining": 97 }
+}
+```
+
+Supported input formats: JPEG, PNG, WebP, GIF, HEIC/HEIF, TIFF, and camera RAW (CR2, NEF, ARW, DNG, and more).
+
+### Check monthly usage
+
+```shell
+curl https://pixsqueeze-api-production.up.railway.app/usage \
+  -H "Authorization: Bearer psx_YOUR_API_KEY"
+```
+
+```json
+{
+  "plan": "FREE",
+  "used": 3,
+  "limit": 100,
+  "remaining": 97,
+  "resetDate": "2026-07-01"
+}
 ```
 
 [⬆ back to top](#table-of-contents)
