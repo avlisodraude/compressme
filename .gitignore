@@ -11,3 +11,6 @@ api/.env
 # Private API (separate repo)
 api/
 railway.json
+
+# Local-only backup of the previous docs theme
+docs/index2.html
