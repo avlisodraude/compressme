@@ -624,6 +624,39 @@
       color: var(--text-3);
     }
 
+    /* ── Batch API cross-promo ─────────────────────────────────────────── */
+    .api-promo {
+      margin-top: 2.5rem;
+      padding: 2rem 2.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(var(--surface), var(--surface)) padding-box,
+        var(--grad-soft);
+      box-shadow: var(--glow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .api-promo h2 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+    .api-promo p {
+      margin-top: .4rem;
+      max-width: 34rem;
+      font-size: .95rem;
+      color: var(--text-2);
+    }
+    .api-promo-cta {
+      display: flex;
+      gap: .65rem;
+      flex-wrap: wrap;
+    }
+
     /* ── Footer ────────────────────────────────────────────────────────── */
     footer {
       border-top: 1px solid var(--border);
@@ -671,6 +704,7 @@
             </div>
           </details>
         </li>
+        <li><a href="https://alosha.dev" title="Hosted batch compression API">Batch API</a></li>
         <li><a href="https://github.com/avlisodraude/compressme">GitHub</a></li>
         <li>
           <button class="theme-btn" id="themeToggle" aria-label="Toggle dark / light mode" title="Toggle dark / light mode">
@@ -890,11 +924,24 @@
       </div>
 
     </div><!-- /#app -->
+
+    <!-- ── Batch API cross-promo ──────────────────────────────────────────── -->
+    <section class="api-promo">
+      <div class="api-promo-text">
+        <h2>Need this server-side, at scale?</h2>
+        <p>The <strong>PixSqueeze Batch API</strong> compresses up to 1,000 images per request — JPEG, PNG, WebP, HEIC, TIFF and camera RAW. <strong>100 images free every month</strong>, no credit card required.</p>
+      </div>
+      <div class="api-promo-cta">
+        <a class="btn-hero primary" href="https://alosha.dev">Try the Batch API →</a>
+        <a class="btn-hero ghost" href="https://alosha.dev/docs">API docs</a>
+      </div>
+    </section>
   </main>
 
   <!-- ── Footer ───────────────────────────────────────────────────────────── -->
   <footer>
     <ul class="footer-links">
+      <li><a href="https://alosha.dev">Batch API</a></li>
       <li><a href="https://github.com/avlisodraude/compressme">GitHub</a></li>
       <li><a href="https://github.com/avlisodraude/compressme/releases">Releases</a></li>
       <li><a href="https://github.com/avlisodraude/compressme/blob/main/LICENSE">License</a></li>
