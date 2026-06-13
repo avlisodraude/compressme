@@ -1,6 +1,6 @@
 {
   "name": "pixsqueeze",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "JavaScript image compressor with server-side conversion for HEIC, TIFF, and other formats browsers can't read natively.",
   "main": "dist/pixsqueeze.common.js",
   "module": "dist/pixsqueeze.esm.js",
@@ -49,7 +49,7 @@
   "bugs": {
     "url": "https://github.com/avlisodraude/pixsqueeze/issues"
   },
-  "homepage": "https://pixsqueeze.alosha.dev",
+  "homepage": "https://pixsqueeze.alosha.dev/demo",
   "overrides": {
     "@tootallnate/once": ">=2.0.1",
     "mocha": {

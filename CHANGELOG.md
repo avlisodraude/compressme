@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.3 (Jun 13, 2026)
+
+- Point `homepage` to the new live demo at `pixsqueeze.alosha.dev/demo`; the GitHub Pages demo now redirects there.
+- README leads with a live-demo link alongside the hosted Batch API.
+
 ## 1.3.2 (Jun 13, 2026)
 
 - Rebrand to PixSqueeze under the Alosha studio. Update `repository` and `homepage` to `github.com/avlisodraude/pixsqueeze` and `pixsqueeze.alosha.dev`.

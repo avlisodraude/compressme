@@ -6,7 +6,7 @@
 
 Built by [Alosha](https://alosha.dev) — privacy-first developer tools powered by open source.
 
-- [Website](https://pixsqueeze.alosha.dev)
+- [▶ Live demo](https://pixsqueeze.alosha.dev/demo) · [Hosted Batch API](https://pixsqueeze.alosha.dev)
 
 ## Table of contents
 
