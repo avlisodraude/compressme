@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+  CompressMe → PixSqueeze redirect stub.
+
+  PURPOSE: retire the old CompressMe GitHub Pages identity by redirecting all
+  its traffic to the new product home.
+
+  DEPLOY: rename this file to `index.html` and publish it as the root of the
+  old CompressMe GitHub Pages site (the `avlisodraude.github.io/compressme`
+  deployment). Keep a minimal `compressme` repo/branch alive solely to serve it.
+
+  ⚠️ DO NOT ACTIVATE until https://pixsqueeze.alosha.dev is live (WS-C), or you
+  will redirect visitors to a dead subdomain. Until then, the rebranded docs
+  site continues to serve PixSqueeze normally.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PixSqueeze (formerly CompressMe)</title>
+  <link rel="canonical" href="https://pixsqueeze.alosha.dev">
+  <meta http-equiv="refresh" content="0; url=https://pixsqueeze.alosha.dev">
+  <meta name="robots" content="noindex">
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #0f1117; color: #f3f4f6;
+           display: flex; min-height: 100vh; margin: 0; align-items: center; justify-content: center; text-align: center; }
+    a { color: #818cf8; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>CompressMe is now PixSqueeze</h1>
+    <p>Redirecting you to <a href="https://pixsqueeze.alosha.dev">pixsqueeze.alosha.dev</a>…</p>
+    <p style="opacity:.7">Built by <a href="https://alosha.dev">Alosha</a>.</p>
+  </main>
+  <script>
+    // Preserve any path/query when forwarding (e.g. /examples/* deep links).
+    var dest = 'https://pixsqueeze.alosha.dev';
+    var extra = (location.pathname || '').replace(/^\/(compressme)\/?/, '/') + (location.search || '') + (location.hash || '');
+    location.replace(dest + (extra && extra !== '/' ? extra : ''));
+  </script>
+</body>
+</html>

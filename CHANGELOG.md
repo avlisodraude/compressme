@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.2 (Jun 13, 2026)
+
+- Rebrand to PixSqueeze under the Alosha studio. Update `repository` and `homepage` to `github.com/avlisodraude/pixsqueeze` and `pixsqueeze.alosha.dev`.
+- Retire the CompressMe identity across the README, docs site, and bundle banners; add "Built by Alosha" messaging.
+
 ## 1.3.0 (Apr 6, 2026)
 
 - Convert the resulting Blob object into a File object for modern browsers (#146).

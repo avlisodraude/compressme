@@ -1,10 +1,12 @@
 # PixSqueeze
 
-[![Coverage Status](https://img.shields.io/codecov/c/github/avlisodraude/compressme.svg)](https://codecov.io/gh/avlisodraude/compressme) [![Downloads](https://img.shields.io/npm/dm/pixsqueeze.svg)](https://www.npmjs.com/package/pixsqueeze) [![Version](https://img.shields.io/npm/v/pixsqueeze.svg)](https://www.npmjs.com/package/pixsqueeze) [![Gzip Size](https://img.shields.io/bundlephobia/minzip/pixsqueeze.svg)](https://unpkg.com/pixsqueeze/dist/pixsqueeze.common.js)
+[![Coverage Status](https://img.shields.io/codecov/c/github/avlisodraude/pixsqueeze.svg)](https://codecov.io/gh/avlisodraude/pixsqueeze) [![Downloads](https://img.shields.io/npm/dm/pixsqueeze.svg)](https://www.npmjs.com/package/pixsqueeze) [![Version](https://img.shields.io/npm/v/pixsqueeze.svg)](https://www.npmjs.com/package/pixsqueeze) [![Gzip Size](https://img.shields.io/bundlephobia/minzip/pixsqueeze.svg)](https://unpkg.com/pixsqueeze/dist/pixsqueeze.common.js)
 
 > JavaScript image compressor with server-side conversion for HEIC, TIFF, and camera RAW formats. The client-side compression uses the browser's native [HTMLCanvasElement.toBlob()](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) method — **lossy**, **asynchronous**, and behaviour varies across browsers. Precompress images on the client side before uploading, with automatic server-assisted pre-conversion for formats browsers cannot natively read.
 
-- [Website](https://avlisodraude.github.io/compressme)
+Built by [Alosha](https://alosha.dev) — privacy-first developer tools powered by open source.
+
+- [Website](https://pixsqueeze.alosha.dev)
 
 ## Table of contents
 
@@ -739,5 +741,9 @@ Maintained under the [Semantic Versioning guidelines](https://semver.org/).
 ## License
 
 [MIT](https://opensource.org/licenses/MIT) © Eduardo Silva Navarrete
+
+---
+
+Built by [Alosha](https://alosha.dev). PixSqueeze is part of the Alosha open-source portfolio — see the hosted offering at [pixsqueeze.alosha.dev](https://pixsqueeze.alosha.dev).
 
 [⬆ back to top](#table-of-contents)

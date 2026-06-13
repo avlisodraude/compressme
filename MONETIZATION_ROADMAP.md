@@ -1,4 +1,6 @@
-# CompressMe — Monetization Roadmap
+# PixSqueeze — Monetization Roadmap
+
+> Note: superseded in part by the Alosha Studio roadmap. PixSqueeze is now an Alosha product at pixsqueeze.alosha.dev.
 
 ## The Strategy in One Sentence
 
@@ -12,7 +14,7 @@ Publish a free, open-source npm package for single-image compression (including 
 
 ### What to ship
 - Make the repo public on GitHub
-- Publish to npm as `compressme` (or `@yourhandle/compressme`)
+- Publish to npm as `pixsqueeze`
 - Single image compression: JPEG, PNG, WebP, TIFF, **HEIC** (your key differentiator)
 - Browser-side JS + optional Node server for HEIC/TIFF
 
@@ -28,7 +30,7 @@ Publish a free, open-source npm package for single-image compression (including 
 
 ### What to do in the README
 - Lead with **HEIC and TIFF support** — that's the hook
-- Add a clear banner: *"Need batch processing? → [CompressMe API](#)"* (link to waitlist/email for now)
+- Add a clear banner: *"Need batch processing? → [PixSqueeze API](#)"* (link to waitlist/email for now)
 - Add a GitHub Sponsors button to monetize early adopters even before the API is live
 
 ---
@@ -53,7 +55,7 @@ You don't need to buy infrastructure. Start with:
 - **[Render.com](https://render.com)** — similar, free tier available, auto-deploys from GitHub.
 - **[Fly.io](https://fly.io)** — more powerful, generous free tier, great for Node apps.
 
-Get a domain when you have paying customers. Until then, `compressme.up.railway.app` works fine for an API.
+Get a domain when you have paying customers. Until then, a `*.up.railway.app` subdomain works fine for an API.
 
 ### Billing
 - Use **[Stripe](https://stripe.com)** with Metered Billing
@@ -88,7 +90,7 @@ Get a domain when you have paying customers. Until then, `compressme.up.railway.
 - The server-side HEIC conversion can be called from the app via your API
 
 ### App concept
-**CompressMe Mobile** — drag, compress, share.
+**PixSqueeze Mobile** — drag, compress, share.
 - User picks image(s) from camera roll (including HEIC from iPhone)
 - App compresses locally for small files, calls your API for batch/TIFF
 - Output: saves back to camera roll or shares directly

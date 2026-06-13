@@ -1,11 +1,11 @@
 /*!
- * PixSqueeze.js v1.3.1
- * https://avlisodraude.github.io/compressme
+ * PixSqueeze.js v1.3.2
+ * https://pixsqueeze.alosha.dev
  *
  * Copyright 2018-present Eduardo Silva Navarrete
  * Released under the MIT license
  *
- * Date: 2026-06-09T15:58:08.230Z
+ * Date: 2026-06-13T06:11:27.295Z
  */
 'use strict';
 

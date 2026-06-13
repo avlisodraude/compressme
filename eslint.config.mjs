@@ -75,14 +75,15 @@ export default [
     },
   },
 
-  // ── Server files (Node.js — console logging is intentional) ────────────────
+  // ── Server + API files (Node.js — console logging is intentional) ──────────
   {
-    files: ['server/**/*.js'],
+    files: ['server/**/*.js', 'api/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'commonjs',
       globals: {
         ...globals.node,
+        fetch: 'readonly',
       },
     },
     rules: {
