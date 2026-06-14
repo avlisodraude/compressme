@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.4 (Jun 14, 2026)
+
+- Remove server-only packages (`express`, `sharp`, `multer`, `heic-convert`, `compression`) from runtime `dependencies` — they are used only by the local demo `server/` and are now `devDependencies`. The published browser library has **zero** runtime dependencies, which drops install size and clears the supply-chain alerts those transitive trees produced.
+
 ## 1.3.3 (Jun 13, 2026)
 
 - Point `homepage` to the new live demo at `pixsqueeze.alosha.dev/demo`; the GitHub Pages demo now redirects there.
